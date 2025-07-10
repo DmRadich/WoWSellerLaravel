@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gold', function (Blueprint $table) {
+        Schema::create('golds', function (Blueprint $table) {
             $table->id();
-            $table->string('server')->default('any');
-            $table->string('faction');
-            $table->text('description');
-            $table->string('seller_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('server_id')->constrained('servers')->onDelete('cascade');
+            $table->foreignId('faction_id')->constrained('factions')->onDelete('cascade');
+            $table->foreignId('seller_id')->constrained('users')->onDelete('cascade');
             $table->decimal('price', 10, 2);
             $table->softDeletes();
+
             $table->timestamps();
         });
     }
