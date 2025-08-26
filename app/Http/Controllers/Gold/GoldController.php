@@ -24,17 +24,16 @@ class GoldController extends Controller
      */
     public function index(FilterRequest $request)
     {
-        {
             $data = $request->validated();
 
             $filter = app()->make(GoldFilter::class, ['queryParams' => array_filter($data)]);
             $golds = Gold::with(['server', 'faction', 'seller'])->filter($filter)->paginate(10);
-            $goldsCount = Gold::count();
-            $servers = Server::all();
-            $factions = Faction::all();
+            $goldsCount = $golds->total();
+            $servers = Server::pluck('name', 'id');
+            $factions = Faction::pluck('faction_name', 'id');
+
 
             return view('gold.index', compact('golds', 'servers', 'factions', 'goldsCount'));
-        }
     }
 
     /**
@@ -44,8 +43,8 @@ class GoldController extends Controller
     {
         $golds = Gold::with(['server', 'faction', 'seller'])->where('seller_id', auth()->id())->latest()->get();
 
-        $servers = Server::all();
-        $factions = Faction::all();
+        $servers = Server::pluck('name', 'id');
+        $factions = Faction::pluck('faction_name', 'id');
 
         return view('gold.create', compact('golds', 'servers', 'factions'));
     }
@@ -80,8 +79,8 @@ class GoldController extends Controller
             abort(403);
         }
 
-        $servers = Server::all();
-        $factions = Faction::all();
+        $servers = Server::pluck('name', 'id');
+        $factions = Faction::pluck('faction_name', 'id');
 
         return view('gold.edit', compact('gold', 'servers', 'factions'));
     }

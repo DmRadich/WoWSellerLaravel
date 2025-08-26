@@ -43,10 +43,10 @@
                     <label for="server">{{ __('Server') }}</label>
                     <select class="form-control" id="server" name="server_id">
                         <option selected>{{ __('Server') }}</option>
-                        @foreach($servers as $server)
+                        @foreach($servers as $id => $name)
                             <option
-                                {{ old('server_id') == $server->id ? 'selected' : ''}} value="{{ $server->id }}">
-                                {{ $server->name }}
+                                {{ old('server_id') == $id ? 'selected' : ''}} value="{{ $id }}">
+                                {{ $name }}
                             </option>
                         @endforeach
                     </select>
@@ -61,10 +61,10 @@
                     <label for="faction">{{ __('Faction') }}</label>
                     <select class="form-control" name="faction_id" id="faction">
                         <option selected>{{ __('Faction') }}</option>
-                        @foreach($factions as $faction)
+                        @foreach($factions as $id => $faction_name)
                             <option
-                                {{ old('faction_id') == $faction->id ? 'selected' : '' }} value="{{ $faction->id }}">
-                                {{ $faction->faction_name }}
+                                {{ old('faction_id') == $id ? 'selected' : '' }} value="{{ $id }}">
+                                {{ $faction_name }}
                             </option>
                         @endforeach
                     </select>

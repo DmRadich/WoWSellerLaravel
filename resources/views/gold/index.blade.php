@@ -32,15 +32,15 @@
             <div class="d-flex flex-wrap align-items-center gap-2">
                 <select class="form-select w-auto" name="server">
                     <option selected>Server</option>
-                    @foreach($servers as $server)
-                        <option value="{{ $server->id }}">{{ $server->name }}</option>
+                    @foreach($servers as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
                     @endforeach
                 </select>
 
                 <select class="form-select w-auto" name="side">
                     <option selected>Faction</option>
-                    @foreach($factions as $faction)
-                        <option value="{{ $faction->id }}">{{ $faction->faction_name }}</option>
+                    @foreach($factions as $id => $faction_name)
+                        <option value="{{ $id }}">{{ $faction_name }}</option>
                     @endforeach
                 </select>
                 <a href="{{ route('golds.create') }}" class="btn btn-default btn-wide ms-auto">Sell game currency</a>
