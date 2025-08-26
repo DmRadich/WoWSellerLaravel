@@ -27,4 +27,14 @@ class StoreRequest extends FormRequest
             'price' => ['required', 'numeric', 'min:0.01'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'server_id.exists' => 'Это поле является обязательным',
+            'faction_id.exists' => 'Это поле является обязательным',
+            'price.required' => 'Это поле является обязательным',
+            'price.numeric' => 'Это поле должно быть числом',
+        ];
+    }
 }

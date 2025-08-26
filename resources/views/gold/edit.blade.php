@@ -6,6 +6,9 @@
             @csrf
             @method('patch')
             <div class="container mt-2 col-md-5 text-lg-left">
+                <div>
+                    <a href="{{ route('golds.index') }}">Back</a>
+                </div>
                 <h2 class="fw-bold">{{ __('Edit Offer') }}</h2>
                 <div class="d-flex flex-wrap align-items-center gap-2">
                     <label for="server">{{ __('Server') }}</label>
@@ -33,8 +36,12 @@
                            inputmode="decimal"
                            name="price" id="price">
                 </div>
-
                 <button type="submit" class="btn btn-primary btn-lg w-100 mt-2">Update</button>
+                <form action="{{ route('golds.destroy', $gold->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Delete" class="btn btn-danger btn-lg w-100 mt-2">
+                </form>
             </div>
         </form>
     </div>

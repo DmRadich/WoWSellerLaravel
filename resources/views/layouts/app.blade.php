@@ -55,12 +55,20 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
+
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+{{--                                {{ Auth::user()->name }}--}}
+                                <div class="user-link-photo">
+                                    <img src="{{ asset('img/layout/avatar.png') }}" alt="Аватар">
+                                </div>
                             </a>
 
+
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('users.show', auth()->id()) }}">
+                                    {{ __('Profile') }}
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

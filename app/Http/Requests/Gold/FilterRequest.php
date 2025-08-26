@@ -22,8 +22,8 @@ class FilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'server_id' => ['required', 'exists:servers,id'],
-            'faction_id' => ['required', 'exists:factions,id'],
+            'server_id' => ['nullable', 'exists:servers,id'],
+            'faction_id' => ['nullable', 'exists:factions,id'],
         ];
     }
 }

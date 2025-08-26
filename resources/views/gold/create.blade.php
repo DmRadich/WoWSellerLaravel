@@ -4,6 +4,7 @@
     <div>
         <form action="{{ route('golds.store') }}" method="post">
             @csrf
+{{--            Your Offer          --}}
             <div class="container mt-2 col-md-5 text-lg-left">
                 <h2 class="fw-bold">{{ __('Your Offer') }}</h2>
                 @auth
@@ -35,6 +36,8 @@
                         </table>
                     @endif
                 @endauth
+
+{{--                New Offer           --}}
                 <h2 class="fw-bold">{{ __('New Offer') }}</h2>
                 <div class="d-flex flex-wrap align-items-center gap-2">
                     <label for="server">{{ __('Server') }}</label>
@@ -42,27 +45,45 @@
                         <option selected>{{ __('Server') }}</option>
                         @foreach($servers as $server)
                             <option
-                                {{ old('server') == $server->id ? 'selected' : ''}} value="{{ $server->id }}">
+                                {{ old('server_id') == $server->id ? 'selected' : ''}} value="{{ $server->id }}">
                                 {{ $server->name }}
                             </option>
                         @endforeach
                     </select>
+                    @error('server_id')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
                     <label for="faction">{{ __('Faction') }}</label>
                     <select class="form-control" name="faction_id" id="faction">
                         <option selected>{{ __('Faction') }}</option>
                         @foreach($factions as $faction)
                             <option
-                                {{ old('faction') == $faction->id ? 'selected' : '' }} value="{{ $faction->id }}">
+                                {{ old('faction_id') == $faction->id ? 'selected' : '' }} value="{{ $faction->id }}">
                                 {{ $faction->faction_name }}
                             </option>
                         @endforeach
                     </select>
+                    @error('faction_id')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
                 <div class="d-flex flex-wrap align-items-center gap-2 mt-3">
                     <label for="price">{{ __('Price/1000') }}</label>
                     <input value="{{old('price')}}" class="form-control price" type="text"
                            inputmode="decimal"
                            name="price" id="price">
+                    @error('price')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg w-100 mt-2">Save</button>
@@ -70,9 +91,3 @@
         </form>
     </div>
 @endsection
-
-{{--        <form action="{{ route('golds.delete', $gold->id) }}" method="POST">--}}
-{{--            @csrf--}}
-{{--            @method('DELETE')--}}
-{{--            <input type="submit" value="Delete" class="btn btn-danger">--}}
-{{--        </form>--}}

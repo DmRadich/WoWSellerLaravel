@@ -1,13 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Профиль пользователя: {{ $user->name }}</h1>
-
-    @if($user->profile)
-        <p>Онлайн: {{ $user->profile->is_online ? 'Да' : 'Нет' }}</p>
-        <p>Аватар: <img src="{{ $user->profile->avatar_path }}" alt="Аватар"></p>
-        <p>Дата регистрации: {{ $user->profile->registered_at }}</p>
-    @else
-        <p>Профиль не заполнен.</p>
-    @endif
+    <div class="container mt-2 col-md-5 text-lg-left">
+        <div class="profile-cover">
+            <div class="avatar">
+                <div>
+                    <img class="avatar-photo" src="{{ asset('img/layout/avatar.png') }}" alt="Аватар">
+                </div>
+            </div>
+        </div>
+        <div class="profile">
+            <h1 class="mb-4">
+                <span>{{ $user->name }}</span>
+                <span class="media-user-status ms-2">
+                    @if ($user->isOnline())
+                        <span class="online">
+                        Онлайн
+                    </span>
+                    @else
+                        <span class="offline">
+                        Был {{ $user->last_seen_at ? $user->last_seen_at->translatedFormat('d F в H:i') : '' }}
+                    </span>
+                    @endif
+                </span>
+            </h1>
+        </div>
+        <div class="profile-header-cols">
+            <div class="param-item">
+                <h5 class="text-bold">
+                    Дата регистрации
+                </h5>
+                <div class="text-nowrap">
+                    {{ $create = $user->created_at->translatedFormat('d F Y, H:i') }}
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

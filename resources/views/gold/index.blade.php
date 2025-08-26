@@ -32,7 +32,7 @@
             <div class="d-flex flex-wrap align-items-center gap-2">
                 <select class="form-select w-auto" name="server">
                     <option selected>Server</option>
-                @foreach($servers as $server)
+                    @foreach($servers as $server)
                         <option value="{{ $server->id }}">{{ $server->name }}</option>
                     @endforeach
                 </select>
@@ -46,8 +46,6 @@
                 <a href="{{ route('golds.create') }}" class="btn btn-default btn-wide ms-auto">Sell game currency</a>
             </div>
         </div>
-
-
     </div>
     <div class="container mt-2 col-md-5 text-lg-left">
         <table class="table table-hover">
@@ -72,7 +70,7 @@
             </tbody>
         </table>
 
-        {{ $golds->links() }}
+        {{ $golds->withQueryString()->links() }}
 
     </div>
 @endsection

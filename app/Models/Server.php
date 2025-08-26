@@ -11,7 +11,6 @@ class Server extends Model
 
     protected $table = 'servers';
     protected $guarded = [];
-    protected $fillable = [];
 
     public function golds()
     {
